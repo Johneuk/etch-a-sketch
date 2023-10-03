@@ -1,5 +1,12 @@
 body {
     display: flex;
-    justify-content: center;
-    margin-top: 100px;
+    margin-top: 5px;
 }
+
+.buttons {
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 30px;
+}
+

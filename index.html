@@ -22,8 +22,8 @@
 
         document.getElementsByTagName("body")[0].appendChild(mainDiv);
 
-        let columns = 64;
-        let rows = 64;
+        let columns = 100;
+        let rows = 100;
 
         const grid = document.createElement('div'); 
         grid.className = 'grid';
@@ -58,6 +58,38 @@
         cells[i].style.backgroundColor = "black";
         });
     }
+
+    for (let i = 0; i < 2; i++) {            
+        const buttons = document.createElement('button');
+        buttons.className = 'buttons';
+        buttons.style.display = "flex";
+        buttons.style.flex = "1";
+        document.getElementsByTagName("body")[0].appendChild(buttons);
+    }
+
+    const resetButtonText = document.createTextNode("Delete");
+    document.getElementsByClassName("buttons")[0].appendChild(resetButtonText);
+
+    const pixelPromptButtonText = document.createTextNode("Resolution");
+    document.getElementsByClassName("buttons")[1].appendChild(pixelPromptButtonText);
+
+    document.getElementsByClassName("buttons")[0].addEventListener("click", function () {
+            for (let i = 0; i < cells.length; i++) {
+            cells[i].style.backgroundColor = "white";
+        }
+    });
+
+    document.getElementsByClassName("buttons")[1].addEventListener("click", function () {
+            let pixelInput = prompt("How many pixels do you want? (Max 100 Pixels)", "")
+            if (pixelInput > 0 && pixelInput <= 100) {
+                columns = +pixelInput;
+                rows = +pixelInput;
+            }
+            else {
+                alert("Please enter a number between 1 and 100");
+            }
+        }
+    );
 
     </script>
 </body>
