@@ -17,44 +17,47 @@
         mainDiv.style.height = "960px";
         mainDiv.style.background = "grey";
         mainDiv.style.color = "white";
-        mainDiv.style.border = "2px solid black";
+        mainDiv.style.border = "1px solid black";
         mainDiv.style.display = "flex";
 
         document.getElementsByTagName("body")[0].appendChild(mainDiv);
 
-        let columns = 16;
-        let rows = 16;
+        let columns = 64;
+        let rows = 64;
 
-        const grid = document.createElement('div');        // creates grid
+        const grid = document.createElement('div'); 
         grid.className = 'grid';
         grid.style.display = "flex";
         grid.style.flexDirection = "column";
         grid.style.flex = "1";
 
         for (let i = 0; i < columns; ++i) {            
-        const column = document.createElement('div');     // creates column
+        const column = document.createElement('div');
         column.className = 'column';
         column.style.display = "flex";
         column.style.flexDirection = "row";
         column.style.flex = "1";
 
         for (let j = 0; j < rows; ++j) {
-            const cell = document.createElement('div');   // creates cell
+            const cell = document.createElement('div'); 
             cell.className = 'cell';
-            cell.style.margin = "2px";
+            cell.style.margin = "0.5px";
             cell.style.background = "white";
-            cell.style.border = "2px solid black";
+            cell.style.border = "1px solid black";
             cell.style.flex = "1";
-            column.appendChild(cell);                    // appends cell to column (as row)
+            column.appendChild(cell);                 
         }
-        grid.appendChild(column);                        // appends column to grid
+        grid.appendChild(column);                    
     }
-    document.getElementsByClassName("mainDiv")[0].appendChild(grid); // appends grid to mainDiv
+    document.getElementsByClassName("mainDiv")[0].appendChild(grid);
 
-    const cellVar = document.querySelectorAll("cell");
-    document.cellVar.addEventListener("mouseover", function () {
-        document.cellVar.style.backgroundColor("black");
-    });
+    const cells = document.getElementsByClassName("cell");
+
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("mouseover", function () {
+        cells[i].style.backgroundColor = "black";
+        });
+    }
 
     </script>
 </body>
