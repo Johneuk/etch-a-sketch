@@ -11,6 +11,26 @@
 <body>
     <script>
 
+    let columns = 100;
+    let rows = 100;
+
+    const umbrellaDiv = document.createElement("div");
+    document.getElementsByTagName("body")[0].appendChild(umbrellaDiv);
+    umbrellaDiv.className = "umbrellaDiv";
+    umbrellaDiv.style.display = "flex";
+    umbrellaDiv.style.flexDirection = "column-reverse";
+    umbrellaDiv.style.margin = "auto";
+
+    const buttonDiv = document.createElement("div");
+    document.getElementsByClassName("umbrellaDiv")[0].appendChild(buttonDiv);
+    buttonDiv.className = "buttonDiv";
+    buttonDiv.style.flexDirection = "row";
+    buttonDiv.style.display = "flex";
+    buttonDiv.style.justifyContent = "space-around";
+
+    createGrid();
+
+    function createGrid () {
         const mainDiv = document.createElement("div");
         mainDiv.className = "mainDiv";
         mainDiv.style.width = "960px";
@@ -20,10 +40,7 @@
         mainDiv.style.border = "1px solid black";
         mainDiv.style.display = "flex";
 
-        document.getElementsByTagName("body")[0].appendChild(mainDiv);
-
-        let columns = 100;
-        let rows = 100;
+        document.getElementsByClassName("umbrellaDiv")[0].appendChild(mainDiv);
 
         const grid = document.createElement('div'); 
         grid.className = 'grid';
@@ -50,6 +67,7 @@
         grid.appendChild(column);                    
     }
     document.getElementsByClassName("mainDiv")[0].appendChild(grid);
+}
 
     const cells = document.getElementsByClassName("cell");
 
@@ -62,12 +80,10 @@
     for (let i = 0; i < 2; i++) {            
         const buttons = document.createElement('button');
         buttons.className = 'buttons';
-        buttons.style.display = "flex";
-        buttons.style.flex = "1";
-        document.getElementsByTagName("body")[0].appendChild(buttons);
+        document.getElementsByClassName("buttonDiv")[0].appendChild(buttons);
     }
 
-    const resetButtonText = document.createTextNode("Delete");
+    const resetButtonText = document.createTextNode("New");
     document.getElementsByClassName("buttons")[0].appendChild(resetButtonText);
 
     const pixelPromptButtonText = document.createTextNode("Resolution");
@@ -84,6 +100,7 @@
             if (pixelInput > 0 && pixelInput <= 100) {
                 columns = +pixelInput;
                 rows = +pixelInput;
+                createGrid();
             }
             else {
                 alert("Please enter a number between 1 and 100");
