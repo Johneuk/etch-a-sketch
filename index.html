@@ -11,27 +11,32 @@
 <body>
     <script>
 
-    let columns = 100;
-    let rows = 100;
+    let mainDiv;
+    let grid;
+    let cell;
+    let column;
+
+    let columns = 16;
+    let rows = 16;
 
     const umbrellaDiv = document.createElement("div");
     document.getElementsByTagName("body")[0].appendChild(umbrellaDiv);
     umbrellaDiv.className = "umbrellaDiv";
     umbrellaDiv.style.display = "flex";
-    umbrellaDiv.style.flexDirection = "column-reverse";
-    umbrellaDiv.style.margin = "auto";
+    umbrellaDiv.style.flexDirection = "row";
 
     const buttonDiv = document.createElement("div");
     document.getElementsByClassName("umbrellaDiv")[0].appendChild(buttonDiv);
     buttonDiv.className = "buttonDiv";
-    buttonDiv.style.flexDirection = "row";
+    buttonDiv.style.flexDirection = "column";
     buttonDiv.style.display = "flex";
-    buttonDiv.style.justifyContent = "space-around";
+    buttonDiv.style.justifyContent = "flex-start";
 
-    createGrid();
+    createGrid(rows, columns);
 
-    function createGrid () {
-        const mainDiv = document.createElement("div");
+    function createGrid (rows, columns) {
+
+        mainDiv = document.createElement("div");
         mainDiv.className = "mainDiv";
         mainDiv.style.width = "960px";
         mainDiv.style.height = "960px";
@@ -39,24 +44,25 @@
         mainDiv.style.color = "white";
         mainDiv.style.border = "1px solid black";
         mainDiv.style.display = "flex";
+        mainDiv.style.margin = "auto";
 
         document.getElementsByClassName("umbrellaDiv")[0].appendChild(mainDiv);
 
-        const grid = document.createElement('div'); 
+        grid = document.createElement('div'); 
         grid.className = 'grid';
         grid.style.display = "flex";
         grid.style.flexDirection = "column";
         grid.style.flex = "1";
 
         for (let i = 0; i < columns; ++i) {            
-        const column = document.createElement('div');
+        column = document.createElement('div');
         column.className = 'column';
         column.style.display = "flex";
         column.style.flexDirection = "row";
         column.style.flex = "1";
 
         for (let j = 0; j < rows; ++j) {
-            const cell = document.createElement('div'); 
+            cell = document.createElement('div'); 
             cell.className = 'cell';
             cell.style.margin = "0.5px";
             cell.style.background = "white";
@@ -69,12 +75,19 @@
     document.getElementsByClassName("mainDiv")[0].appendChild(grid);
 }
 
-    const cells = document.getElementsByClassName("cell");
+function removeGrid() {
+        umbrellaDiv.removeChild(umbrellaDiv.children[1]);
+}
 
+    mouseDrawing();
+
+    function mouseDrawing() {
+    const cells = document.getElementsByClassName("cell");
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("mouseover", function () {
         cells[i].style.backgroundColor = "black";
         });
+    }
     }
 
     for (let i = 0; i < 2; i++) {            
@@ -83,7 +96,7 @@
         document.getElementsByClassName("buttonDiv")[0].appendChild(buttons);
     }
 
-    const resetButtonText = document.createTextNode("New");
+    const resetButtonText = document.createTextNode("Reset");
     document.getElementsByClassName("buttons")[0].appendChild(resetButtonText);
 
     const pixelPromptButtonText = document.createTextNode("Resolution");
@@ -95,12 +108,20 @@
         }
     });
 
+    document.addEventListener('keydown', event => { //Press "space" to reset the canvas
+    if (event.code === 'Space') {
+        for (let i = 0; i < cells.length; i++) {
+        cells[i].style.backgroundColor = "white";
+    }}})
+
     document.getElementsByClassName("buttons")[1].addEventListener("click", function () {
             let pixelInput = prompt("How many pixels do you want? (Max 100 Pixels)", "")
             if (pixelInput > 0 && pixelInput <= 100) {
                 columns = +pixelInput;
                 rows = +pixelInput;
-                createGrid();
+                removeGrid();
+                createGrid(rows, columns);
+                mouseDrawing();
             }
             else {
                 alert("Please enter a number between 1 and 100");
