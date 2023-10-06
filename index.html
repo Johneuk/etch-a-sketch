@@ -90,6 +90,13 @@ function removeGrid() {
     }
     }
 
+    const cells = document.getElementsByClassName("cell");
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("mouseover", function () {
+        cells[i].style.backgroundColor = "black";
+        });
+    }
+
     for (let i = 0; i < 2; i++) {            
         const buttons = document.createElement('button');
         buttons.className = 'buttons';
@@ -106,7 +113,7 @@ function removeGrid() {
             for (let i = 0; i < cells.length; i++) {
             cells[i].style.backgroundColor = "white";
         }
-    });
+    }); //The "Reset" button resets the canvas to white
 
     document.addEventListener('keydown', event => { //Press "space" to reset the canvas
     if (event.code === 'Space') {
