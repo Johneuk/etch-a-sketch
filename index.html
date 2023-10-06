@@ -85,7 +85,7 @@ function removeGrid() {
     const cells = document.getElementsByClassName("cell");
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("mouseover", function () {
-        cells[i].style.backgroundColor = "black";
+        cells[i].style.backgroundColor = getRandomColor();
         });
     }
     }
@@ -93,7 +93,7 @@ function removeGrid() {
     const cells = document.getElementsByClassName("cell");
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("mouseover", function () {
-        cells[i].style.backgroundColor = "black";
+        cells[i].style.backgroundColor = getRandomColor();
         });
     }
 
@@ -135,6 +135,16 @@ function removeGrid() {
             }
         }
     );
+
+    function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 
     </script>
 </body>
