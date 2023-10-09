@@ -112,6 +112,7 @@ function removeGrid() {
     document.getElementsByClassName("buttons")[0].addEventListener("click", function () {
             for (let i = 0; i < cells.length; i++) {
             cells[i].style.backgroundColor = "white";
+            globalDark = 1;
         }
     }); //The "Reset" button resets the canvas to white
 
@@ -119,6 +120,7 @@ function removeGrid() {
     if (event.code === 'Space') {
         for (let i = 0; i < cells.length; i++) {
         cells[i].style.backgroundColor = "white";
+        globalDark = 1;
     }}})
 
     document.getElementsByClassName("buttons")[1].addEventListener("click", function () {
@@ -136,15 +138,60 @@ function removeGrid() {
         }
     );
 
-    function getRandomColor() {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+    /* let cells1 = document.querySelectorAll(".cell");
 
+    cells1.forEach(function(cell) {
+    cell.addEventListener("click", function () {
+        let pixelInput = prompt("How many pixels do you want? (Max 100 Pixels)", "");
+        if (pixelInput > 0 && pixelInput <= 100) {
+            columns = +pixelInput;
+            rows = +pixelInput;
+            removeGrid();
+            createGrid(rows, columns);
+            mouseDrawing();
+        } else {
+            alert("Please enter a number between 1 and 100");
+        }
+    });
+}); */
+
+
+/*let globalDark = 10;
+
+function getRandomColor() {
+    if (globalDark >= 0) {
+    for (i = globalDark; i >= 0; i--) {
+        let r = Math.floor(Math.random() * 256);
+        let rB = r - r / i;
+        let g = Math.floor(Math.random() * 256);
+        let gB = g - g / i;
+        let b = Math.floor(Math.random() * 256);
+        let bB = b - b / i;
+        globalDark--; 
+    }
+    return `rgb(${rB},${gB},${bB})`;
+    }
+    else {
+    return "black";
+    }
+} */
+
+let globalDark = 1;
+
+function getRandomColor() { //Randomize color and slowly darken the color while drawing
+  if (globalDark > 0) {
+    let r = Math.floor(Math.random() * 256) * globalDark;
+    let g = Math.floor(Math.random() * 256) * globalDark;
+    let b = Math.floor(Math.random() * 256) * globalDark;
+    console.log("Current globalDark value: ", globalDark); // Log the current value
+    globalDark -= 0.001; // reduce globalDark by 0.1%
+    console.log("Current RGB values: ", `rgb(${r},${g},${b})`); // Log RGB colors before rounding
+    return `rgb(${Math.floor(r)},${Math.floor(g)},${Math.floor(b)})`;
+  } else {
+    console.log("Current globalDark value: ", globalDark); // Log when it hits zero or negative
+    return "black";
+  }
+}
 
     </script>
 </body>
